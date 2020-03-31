@@ -70,7 +70,7 @@
         <h4 class="card-title mt-3 text-center">Registro</h4>
         <p class="text-center">Haz una cuenta para ser parte de nosotros</p>
 
-        <form action="">
+        <form action="../model/modelRegistro.php" method="POST">
         <div class="form-group input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -88,20 +88,14 @@
         </div>
         <div  class="col">
             <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="redondo" checked>
+                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="moderador" checked>
                 <label class="custom-control-label" for="customRadio1"><h6>Moderador</h6></label>
             </div>
             <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="sencillo">
+                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="registrado">
                 <label class="custom-control-label" for="customRadio2"><h6>Registrado</h6></label>
             </div></br>
         </div>
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-            </div>
-            <input  class="form-control" placeholder="Nombre Usuario" name="nombreUsuario" id="apellidos" type="text" required>
-        </div> <!-- form-group// -->
         <div class="form-group input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
