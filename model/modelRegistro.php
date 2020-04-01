@@ -23,6 +23,20 @@ if(isset($_POST['customRadio'])){
             $stmt = $mbd->prepare($sql);
             // execute the query
             $stmt->execute();
+
+            //Inicio de variables de sesión
+
+            session_start();
+            $_SESSION['idUsuario']=$id['id'];
+            $_SESSION['nombre']=$_POST["nombre"];
+            $_SESSION['apellidos']=$_POST["apellidos"];
+            $_SESSION['password']=$_POST["password"];
+            $_SESSION['correo']=$_POST["email"];
+            $_SESSION['tipo']="registrado";
+            //$_SESSION['modo']=$result->modo;
+            
+            session_write_close();//cerramos creación de variables de sesión
+
             echo "<script> alert('Has sido registrado!');  window.location.assign('../index.php'); </script>";
             //header('Location: index.php');
             }
