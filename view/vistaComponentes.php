@@ -35,9 +35,98 @@
             <div class="row"></div>
         </div>
         ';
+        return $var;
+    }
+
+    function formPublicaciones(){
+        include 'controller/conexion.php';
+        $gsent = $mbd->prepare("SELECT * FROM categoria");;
+        $gsent->execute();
+        $modulo1 = '
+            <div class="container">
+            <h2>NEW POST</h2>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Crea una nueva publicacion
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Haz una Publicacion '.$_SESSION['nombre'].'</h5>
+                    <img src="view/img/escribir.png" style="width:60px;height:60px;">
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <form action="insertarPost.php">
+                    <div class="form-group">
+                <label for="exampleFormControlSelect1">Selecciona el tema</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+
+        ';
+        $modulo2 = '';
+        while($result1 = $gsent->fetch(PDO::FETCH_ASSOC)){
+            $modulo2 .= '<option>'.$result1['tipo'].'</option>';
+        }
+        $modulo3 = '
+            </select>
+            </div>
+            <div class="form-group">
+            <label for="exampleFormControlTextarea1">Escribe tu Post</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="¿Que estas pensando?" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+            <script> 
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        $("#fotoProducto").attr("src", e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                    }
+                }
+            </script>
+            <label for="exampleFormControlFile1"> <img src="view/img/imagenUpload.png" style="width:60px;height:60px;">Sube una foto</label>
+            <input type="file" onchange="readURL(this)" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+            <img class="col-10" id="fotoProducto"/>
+            <br>
+            <div class="form-group">
+            Fecha:
+            <input id="datepicker" width="276" value="'.$fcha = date("Y-m-d").'" name="fecha"/>
+            <script>
+                $("#datepicker").datepicker({
+                    uiLibrary: "bootstrap4",
+                    language: "es",
+                    format: "yyyy-mm-dd"
+                });
+            </script>
+            </div>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+            
+        </div>
+        ';
+
+        $var= $modulo1.$modulo2.$modulo3;
 
         return $var;
-
     }
 
 ?>
