@@ -63,22 +63,22 @@
                     </button>
                     </div>
                     <div class="modal-body">
-                    <form action="insertarPost.php">
+                    <form action="model/modelInsertarPost.php" method="POST"  enctype="multipart/form-data">
                     <div class="form-group">
                 <label for="exampleFormControlSelect1">Selecciona el tema</label>
-                <select class="form-control" id="exampleFormControlSelect1">
+                <select class="form-control" name="tema" id="exampleFormControlSelect1">
 
         ';
         $modulo2 = '';
         while($result1 = $gsent->fetch(PDO::FETCH_ASSOC)){
-            $modulo2 .= '<option>'.$result1['tipo'].'</option>';
+            $modulo2 .= '<option value="'.$result1['id'].'" >'.$result1['tipo'].'</option>';
         }
         $modulo3 = '
             </select>
             </div>
             <div class="form-group">
             <label for="exampleFormControlTextarea1">Escribe tu Post</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="¿Que estas pensando?" rows="3"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="texto" placeholder="¿Que estas pensando?" rows="3"></textarea>
             </div>
             <div class="form-group">
             <script> 
@@ -94,7 +94,7 @@
                 }
             </script>
             <label for="exampleFormControlFile1"> <img src="view/img/imagenUpload.png" style="width:60px;height:60px;">Sube una foto</label>
-            <input type="file" onchange="readURL(this)" class="form-control-file" id="exampleFormControlFile1">
+            <input type="file" onchange="readURL(this)" name="imagen" class="form-control-file" id="exampleFormControlFile1">
             </div>
             <img class="col-10" id="fotoProducto"/>
             <br>
