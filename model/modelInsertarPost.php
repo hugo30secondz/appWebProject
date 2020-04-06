@@ -16,10 +16,14 @@ echo "</br>";
 if(isset($_POST['tema'])){   
 
         try {
+            $gsent = $mbd->prepare("SELECT id FROM registrado WHERE usuario_id = '".$_SESSION['idUsuario']."' ");
+            $gsent->execute();
+            $id = $gsent->fetch(PDO::FETCH_ASSOC);
+
             $foto = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
             $mbd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             //insertamos en la tabla usuario
-            $sql = "INSERT INTO publicaciones (registrado_id,img,texto,categoria_id,bien,regular,mal,aprobado,fecha) VALUES ('".$_SESSION['idUsuario']."', '".$foto."', '".$_POST["texto"]."', '".$_POST["tema"]."',0 ,0 ,0 ,0, '".$_POST['fecha']."' )" ;
+            $sql = "INSERT INTO publicaciones (registrado_id,img,texto,categoria_id,bien,regular,mal,aprobado,fecha) VALUES ('".$id['id']."', '".$foto."', '".$_POST["texto"]."', '".$_POST["tema"]."',0 ,0 ,0 ,0, '".$_POST['fecha']."' )" ;
             // Prepare statement
             $stmt = $mbd->prepare($sql);
             // execute the query
