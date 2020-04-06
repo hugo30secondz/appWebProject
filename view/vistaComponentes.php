@@ -129,4 +129,55 @@
         return $var;
     }
 
+    function tableAprobarPublicaciones(){
+        include 'controller/conexion.php'; 
+
+        $modulo1 = '
+            <div class="container">
+
+            <h2 style="color:#82CACD">Aprobar Publicaciones</h2>
+            <img class="img-responsive" src="view/img/aprobacion.png" style="width: 71px; border-radius: 43px;">
+
+            </br>
+            <table class="table table-striped">
+                
+                <thead>
+                    <tr>
+                        <th>ID Publicacion</th>
+                        <th>ID del Usuario</th>
+                        <th>Texto</th>
+                        <th>Imagen</th>
+                        <th>Fecha</th>
+                        <th>Aprobación</th>        
+                    </tr>
+                </thead>
+
+        ';
+
+        $modulo2 = '';
+
+        foreach ($mbd->query("SELECT * from publicaciones WHERE aprobado = 0") as $row){ // en proceso es 0, aprobado es 1 y rechazado es 2
+            $modulo2 .= '
+                <tr>
+                    <td>'.$row['id'].'</td>
+                    <td>'.$row['registrado_id'].'</td>
+                    <td>'.$row['texto'].'</td>
+                    <td><img class="img-fluid" style="width:300px; height:150px;" id="fotoProducto" src="data:image/jpeg;base64,'.base64_encode($row['img']).'"/></td>
+                    <td>'.$row['fecha'].'</td>
+                    <td><a title="" href="controller/controllerAprobacion.php?aprobar='.$row['id'].'"><button type="button" style="margin: 5px" class="btn btn-success">Aprobar</button></a><br><a title="" href="controller/controllerAprobacion.php?rechazar='.$row['id'].'"><button type="button" style="margin: 5px" class="btn btn-danger">Rechazar</button></a></td>
+                </tr>
+            ';            
+        }
+
+        $modulo3 = '
+            </table>
+            </br>
+            </div>
+        ';
+
+        $var= $modulo1.$modulo2.$modulo3;
+
+        return $var;
+    }
+
 ?>

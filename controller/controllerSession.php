@@ -9,7 +9,7 @@
 
         if($result){
             //echo "si esta el puto";
-            $gsent = $mbd->prepare("SELECT * FROM registrado  WHERE usuario_id='".$result[id]."' ");
+            $gsent = $mbd->prepare("SELECT * FROM registrado  WHERE usuario_id='".$result[id]."' AND bloqueo = 0 "); //acceso es 0, denegado es 1
             $gsent->execute();
             $result1 = $gsent->fetch(PDO::FETCH_ASSOC);
             if($result1){
@@ -26,7 +26,7 @@
                 header('Location: ../index.php');
             }
             else{
-                $gsent = $mbd->prepare("SELECT * FROM moderador  WHERE usuario_id='".$result[id]."' AND aprobado = 1 ");
+                $gsent = $mbd->prepare("SELECT * FROM moderador  WHERE usuario_id='".$result[id]."' AND aprobado = 1 "); // en proceso es 0
                 $gsent->execute();
                 $result2 = $gsent->fetch(PDO::FETCH_ASSOC);
                 if($result2){
