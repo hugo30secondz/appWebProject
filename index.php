@@ -66,9 +66,7 @@ include 'view/vistaComponentes.php';
         if(isset($_SESSION['idUsuario'])){// si está logueado muestra pantallas para cada usuario dependiendo el tipo
             if($_SESSION['tipo'] == "registrado"){
                 echo formPublicaciones();
-            ?>
-                <h4> USUARIO REGISTRADO </h4>
-            <?php 
+                echo cardsVerPublicaciones();
             }
             else{
                 if($_SESSION['tipo'] == "moderador"){

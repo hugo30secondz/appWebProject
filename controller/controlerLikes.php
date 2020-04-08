@@ -30,7 +30,7 @@ function controlLike(v,n) {
         else{
           document.getElementById('mal'+n).className = "btn btn-danger";
           document.getElementById('bien'+n).className = "btn btn-light";
-        document.getElementById('regular'+n).className = "btn btn-light";
+          document.getElementById('regular'+n).className = "btn btn-light";
         }
       }
     }

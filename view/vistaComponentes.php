@@ -180,4 +180,67 @@
         return $var;
     }
 
+    function cardsVerPublicaciones(){
+        include 'controller/conexion.php';
+        include 'controller/controlerLikes.php'; 
+
+        $modulo1 = '
+            <div class="container">
+                <h2> Bienvenido</h2>
+        ';
+
+        $modulo2 = '';
+        foreach ($mbd->query("SELECT *, publicaciones.id, categoria.tipo, registrado.usuario_id, usuario.nombre FROM (((publicaciones INNER JOIN categoria ON publicaciones.categoria_id = categoria.id) INNER JOIN registrado ON registrado.id = publicaciones.registrado_id) INNER JOIN usuario ON usuario.id = registrado.usuario_id ) WHERE aprobado =0 ") as $row){ // aca puedes hacer la consulta e iterarla con each.
+            $modulo2 .= '
+                <div class="card text-center">
+                <div class="card-header" style="background-color:#FDDDCA">
+                '.$row['nombre'].'
+                </div>
+                <div class="card-body" style="background-color:#82CACD">
+                <h5 class="card-title">'.$row['tipo'].'</h5>
+                <p class="card-text">'.$row['texto'].'</p>
+                <img class="img-fluid" style="width:600px; height:350px;" id="fotoProducto" src="data:image/jpeg;base64,'.base64_encode($row['img']).'"/>
+                <br>
+                <div class="row">                    
+                    <div class="col"></div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <div class="alert alert-success" role="alert">
+                                    <a href="#" class="alert-link">'.$row['bien'].'</a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="alert alert-warning" role="alert">
+                                    <a href="#" class="alert-link">'.$row['regular'].'</a>
+                                </div>
+                            </div>
+                            <div class="col">
+                            <div class="alert alert-danger" role="alert">
+                                <a href="#" class="alert-link">'.$row['mal'].'</a>
+                            </div>
+                            </div>
+                        </div>
+                    <div class="col"></div>
+                </div>
+                <a><button style="margin: 5px" type="button" class="btn btn-light" id="bien'.$row['id'].'" onclick=" controlLike('."'bien'".','.$row['id'].')">Bien</button></a>
+                <a><button style="margin: 5px" type="button" class="btn btn-light" id="regular'.$row['id'].'" onclick=" controlLike('."'regular'".','.$row['id'].')">Regular</button></a>
+                <a><button style="margin: 5px" type="button" class="btn btn-light" id="mal'.$row['id'].'" onclick=" controlLike('."'mal'".','.$row['id'].')">Mal</button></a>
+                </div>
+                <div class="card-footer text-muted">
+                '.$row['fecha'].'
+                </div>
+                </div>
+                <br>        
+            '; 
+        }
+        
+        $modulo3 = '
+        </div>
+        ';
+
+        $var = $modulo1.$modulo2.$modulo3;
+        return $var;
+    }
+
+
 ?>
