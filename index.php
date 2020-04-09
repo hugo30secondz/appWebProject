@@ -74,6 +74,7 @@ include 'view/vistaComponentes.php';
             }
             else{
                 if($_SESSION['tipo'] == "moderador"){
+                    echo formCrearTema();
                     echo tableAprobarPublicaciones();
             ?>
                 <h1> USUARIO MODERADOR </h1>

@@ -243,4 +243,54 @@
     }
 
 
+    function formCrearTema(){
+        $var= '
+        <div class="container">
+        <br>
+        <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+          Click Aqui para crear un nuevo Tema
+        </button>
+      
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Crea un nuevo tema</h4>
+                <img src="view/img/tema.png" style="width:100px;height:60px;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body">
+              <form action="model/modelInsertarTema.php"  method="POST" class="was-validated">
+          <div class="form-group">
+            <label for="tema">Tema:</label>
+            <input type="text" class="form-control" id="tema" placeholder="Ingresa tu nuevo tema" name="tema" required>
+            <div class="valid-feedback">Valido.</div>
+            <div class="invalid-feedback">No valido</div>
+          </div>
+      
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+              </div>
+              
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
+        </div>
+        ';
+        return $var;
+    }
+
+
 ?>
