@@ -182,7 +182,7 @@
 
     function cardsVerPublicaciones(){
         include 'controller/conexion.php';
-        include 'controller/controlerLikes.php'; 
+        include 'controller/controllerLikes.php'; 
 
         $modulo1 = '
             <div class="container">
@@ -205,19 +205,19 @@
                     <div class="col"></div>
                         <div class="row mt-2">
                             <div class="col">
-                                <div class="alert alert-success" role="alert">
-                                    <a href="#" class="alert-link">'.$row['bien'].'</a>
+                                <div class="alert alert-success" id="b'.$row['id'].'" role="alert">
+                                    <a class="alert-link" id="lb'.$row['id'].'">'.$row['bien'].'</a>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="alert alert-warning" role="alert">
-                                    <a href="#" class="alert-link">'.$row['regular'].'</a>
+                                <div class="alert alert-warning" id="r'.$row['id'].'" role="alert">
+                                    <a class="alert-link" id="lr'.$row['id'].'">'.$row['regular'].'</a>
                                 </div>
                             </div>
                             <div class="col">
-                            <div class="alert alert-danger" role="alert">
-                                <a href="#" class="alert-link">'.$row['mal'].'</a>
-                            </div>
+                                <div class="alert alert-danger" id="m'.$row['id'].'" role="alert">
+                                    <a class="alert-link" id="lm'.$row['id'].'">'.$row['mal'].'</a>
+                                </div>
                             </div>
                         </div>
                     <div class="col"></div>

@@ -14,9 +14,26 @@
  
 <div class="container">
   <h2> Bienvenido</h2>
-  <?php 
+  <?php
+        /*var idu=1;
+      var id=n;
+      $.ajax({
+          url:"model/modelLikes.php",
+          data: {idu:idu,id:id},
+          type:"POST",
+          success:function(data){
+              if(data != false){
+                  for (var i = 0; i < data.length; i++) {  
+                      //var idNR = data[i]['id']; 
+                      //$("#bien").append("<tr id='"+idNR+"' class='rowI'><td>"+data[i]['nombres']+"</td><td>"+data[i]['apellidos']+"</td><td>"+data[i]['cargo']+"</td></tr>");
+                      var idlb = 'lb'+n;
+                      $("#b"+id).append("<a class='alert-link' id='"+idlb+"'>"+data[i]['bien']+"</a>");
+                  }
+              } 
+          }
+      })*/ 
 include '../controller/conexion.php';
-include '../controller/controlerLikes.php'; 
+include '../controller/controllerLikes.php'; 
 foreach ($mbd->query("SELECT *, publicaciones.id, categoria.tipo, registrado.usuario_id, usuario.nombre FROM (((publicaciones INNER JOIN categoria ON publicaciones.categoria_id = categoria.id) INNER JOIN registrado ON registrado.id = publicaciones.registrado_id) INNER JOIN usuario ON usuario.id = registrado.usuario_id ) WHERE aprobado =0 ") as $row){ // aca puedes hacer la consulta e iterarla con each. ?> 
 <div class="card text-center">
   <div class="card-header" style="background-color:#FDDDCA">
