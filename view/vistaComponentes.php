@@ -288,9 +288,36 @@
         </div>
         
         </div>
+        <hr>
         ';
         return $var;
     }
 
+
+    function buzon(){
+        include 'controller/conexion.php'; 
+
+        $modulo1 = '
+        <div>
+        <h4>Revisa tu buzón<h4>
+        ';
+
+        $modulo2 = '';
+        include 'controller/conexion.php'; 
+        $CanReg = $mbd->prepare("SELECT * FROM publicaciones");
+        $CanReg -> execute();
+        $CountReg = $CanReg -> fetchAll();
+        $TRegistros = count($CountReg);
+        echo "Tienes ",$TRegistros ," notificaciones pendientes";  //sale bien?
+       
+        $modulo3 = '
+        <a href="index.php?run=true"><img src="view/img/buzon.png" alt="buzon"width="150" height="150"></a>
+        </div>
+        ';
+
+        $var= $modulo1.$modulo2.$modulo3;
+
+        return $var;
+    }
 
 ?>
