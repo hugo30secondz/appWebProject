@@ -27,7 +27,7 @@ if(isset($_POST['tema'])){
             // execute the query
             $stmt->execute();
 
-            echo "<script> alert('tu publicacion ha sido mandada :) ');  window.location.assign('../index.php'); </script>";
+            echo "<script> alert('tu tema ha sido creado:) ');  window.location.assign('../index.php'); </script>";
             //header('Location: index.php');
             }
         catch(PDOException $e)

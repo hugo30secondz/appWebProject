@@ -190,7 +190,7 @@
         ';
 
         $modulo2 = '';
-        foreach ($mbd->query("SELECT *, publicaciones.id, categoria.tipo, registrado.usuario_id, usuario.nombre FROM (((publicaciones INNER JOIN categoria ON publicaciones.categoria_id = categoria.id) INNER JOIN registrado ON registrado.id = publicaciones.registrado_id) INNER JOIN usuario ON usuario.id = registrado.usuario_id ) WHERE aprobado =0 ") as $row){ // aca puedes hacer la consulta e iterarla con each.
+        foreach ($mbd->query("SELECT *, publicaciones.id, categoria.tipo, registrado.usuario_id, usuario.nombre FROM (((publicaciones INNER JOIN categoria ON publicaciones.categoria_id = categoria.id) INNER JOIN registrado ON registrado.id = publicaciones.registrado_id) INNER JOIN usuario ON usuario.id = registrado.usuario_id ) WHERE aprobado =1 ") as $row){ // aca puedes hacer la consulta e iterarla con each.
             $modulo2 .= '
                 <div class="card text-center">
                 <div class="card-header" style="background-color:#FDDDCA">
