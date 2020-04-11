@@ -65,6 +65,19 @@ include 'view/vistaComponentes.php';
         </form>
         </div>
     </nav>
+    <div align="center">
+    <h4>Revisa tu buzón<h4>
+    <?php
+    include 'controller/conexion.php'; 
+    $CanReg = $mbd->prepare("SELECT * FROM publicaciones");
+    $CanReg -> execute();
+    $CountReg = $CanReg -> fetchAll();
+    $TRegistros = count($CountReg);
+    echo "Tienes ",$TRegistros ," notificaciones pendientes";  //sale bien?>
+    <a href='index.php?run=true'><img src="view/img/buzon.png" alt="buzon"width="150" height="150"></a>
+
+
+    </div>
 
     <?php 
         if(isset($_SESSION['idUsuario'])){// si está logueado muestra pantallas para cada usuario dependiendo el tipo
@@ -75,7 +88,16 @@ include 'view/vistaComponentes.php';
             else{
                 if($_SESSION['tipo'] == "moderador"){
                     echo formCrearTema();
-                    echo tableAprobarPublicaciones();
+                    
+                    function runMyFunction() {
+                      echo tableAprobarPublicaciones();
+                    }
+                  
+                    if (isset($_GET['run'])) {
+                      runMyFunction();
+                    }
+                  
+                    //echo tableAprobarPublicaciones();
             ?>
                 <h1> USUARIO MODERADOR </h1>
             <?php
