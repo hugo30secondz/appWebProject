@@ -341,7 +341,7 @@
 
         $modulo2 = '';
         include 'controller/conexion.php'; 
-        $CanReg = $mbd->prepare("SELECT * FROM publicaciones");
+        $CanReg = $mbd->prepare("SELECT * FROM publicaciones WHERE aprobado = 0 ");
         $CanReg -> execute();
         $CountReg = $CanReg -> fetchAll();
         $TRegistros = count($CountReg);
