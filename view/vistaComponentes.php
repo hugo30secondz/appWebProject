@@ -188,9 +188,14 @@
             <div class="container">
                 <h2> Bienvenido</h2>
         ';
-
+        //$mbd2 = $mbd;
         $modulo2 = '';
         foreach ($mbd->query("SELECT *, publicaciones.id, categoria.tipo, registrado.usuario_id, usuario.nombre FROM (((publicaciones INNER JOIN categoria ON publicaciones.categoria_id = categoria.id) INNER JOIN registrado ON registrado.id = publicaciones.registrado_id) INNER JOIN usuario ON usuario.id = registrado.usuario_id ) WHERE aprobado =1 ") as $row){ // aca puedes hacer la consulta e iterarla con each.
+            $botones = '';
+            $gsent = $mbd->prepare("SELECT status FROM likes WHERE registrado_id='".$_SESSION['idRegistrado']."' AND publicaciones_id='".$row['id']."' ");
+            $gsent->execute();
+            $result = $gsent->fetch(PDO::FETCH_ASSOC);
+            //if($result){
             $modulo2 .= '
                 <div class="card text-center">
                 <div class="card-header" style="background-color:#FDDDCA">
@@ -221,10 +226,42 @@
                             </div>
                         </div>
                     <div class="col"></div>
-                </div>
-                <a><button style="margin: 5px" type="button" class="btn btn-light" id="bien'.$row['id'].'" onclick=" controlLike('."'bien'".','.$row['id'].')">Bien</button></a>
-                <a><button style="margin: 5px" type="button" class="btn btn-light" id="regular'.$row['id'].'" onclick=" controlLike('."'regular'".','.$row['id'].')">Regular</button></a>
-                <a><button style="margin: 5px" type="button" class="btn btn-light" id="mal'.$row['id'].'" onclick=" controlLike('."'mal'".','.$row['id'].')">Mal</button></a>
+                </div> 
+            ';
+                if($result){
+                    if($result['status'] == "bien"){
+                        $botones = '
+                        <a><button style="margin: 5px" type="button" class="btn btn-success" id="bien'.$row['id'].'" onclick=" controlLike('."'bien'".','.$row['id'].')">Bien</button></a>
+                        <a><button style="margin: 5px" type="button" class="btn btn-light" id="regular'.$row['id'].'" onclick=" controlLike('."'regular'".','.$row['id'].')">Regular</button></a>
+                        <a><button style="margin: 5px" type="button" class="btn btn-light" id="mal'.$row['id'].'" onclick=" controlLike('."'mal'".','.$row['id'].')">Mal</button></a>  
+                        ';
+                    }
+                    else{
+                        if($result['status'] == "regular"){
+                            $botones = '
+                            <a><button style="margin: 5px" type="button" class="btn btn-light" id="bien'.$row['id'].'" onclick=" controlLike('."'bien'".','.$row['id'].')">Bien</button></a>
+                            <a><button style="margin: 5px" type="button" class="btn btn-warning" id="regular'.$row['id'].'" onclick=" controlLike('."'regular'".','.$row['id'].')">Regular</button></a>
+                            <a><button style="margin: 5px" type="button" class="btn btn-light" id="mal'.$row['id'].'" onclick=" controlLike('."'mal'".','.$row['id'].')">Mal</button></a>  
+                            ';
+                        }
+                        else{//mal
+                            $botones = '
+                            <a><button style="margin: 5px" type="button" class="btn btn-light" id="bien'.$row['id'].'" onclick=" controlLike('."'bien'".','.$row['id'].')">Bien</button></a>
+                            <a><button style="margin: 5px" type="button" class="btn btn-light" id="regular'.$row['id'].'" onclick=" controlLike('."'regular'".','.$row['id'].')">Regular</button></a>
+                            <a><button style="margin: 5px" type="button" class="btn btn-danger" id="mal'.$row['id'].'" onclick=" controlLike('."'mal'".','.$row['id'].')">Mal</button></a>  
+                            ';
+                        }
+                    }
+                }
+                else{
+                    $botones = '
+                    <a><button style="margin: 5px" type="button" class="btn btn-light" id="bien'.$row['id'].'" onclick=" controlLike('."'bien'".','.$row['id'].')">Bien</button></a>
+                    <a><button style="margin: 5px" type="button" class="btn btn-light" id="regular'.$row['id'].'" onclick=" controlLike('."'regular'".','.$row['id'].')">Regular</button></a>
+                    <a><button style="margin: 5px" type="button" class="btn btn-light" id="mal'.$row['id'].'" onclick=" controlLike('."'mal'".','.$row['id'].')">Mal</button></a>  
+                    ';
+                }
+
+            $modulo2 = $modulo2.$botones.'
                 </div>
                 <div class="card-footer text-muted">
                 '.$row['fecha'].'

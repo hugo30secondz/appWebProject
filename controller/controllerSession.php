@@ -20,6 +20,7 @@
                 $_SESSION['password']=$result["password"];
                 $_SESSION['correo']=$result["email"];
                 $_SESSION['tipo']="registrado";
+                $_SESSION['idRegistrado']=$result1["id"];
                 //$_SESSION['modo']=$result->modo;
                 
                 session_write_close();//cerramos creación de variables de sesión

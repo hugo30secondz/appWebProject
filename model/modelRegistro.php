@@ -25,6 +25,9 @@ if(isset($_POST['customRadio'])){
             $stmt->execute();
 
             //Inicio de variables de sesión
+            $gsent = $mbd->prepare("SELECT id FROM registrado WHERE usuario_id= '".$id['id']."' ");
+            $gsent->execute();
+            $idR = $gsent->fetch(PDO::FETCH_ASSOC);
 
             session_start();
             $_SESSION['idUsuario']=$id['id'];
@@ -33,7 +36,7 @@ if(isset($_POST['customRadio'])){
             $_SESSION['password']=$_POST["password"];
             $_SESSION['correo']=$_POST["email"];
             $_SESSION['tipo']="registrado";
-            //$_SESSION['modo']=$result->modo;
+            $_SESSION['idRegistrado']=$idR["id"];
             
             session_write_close();//cerramos creación de variables de sesión
 
