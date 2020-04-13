@@ -25,7 +25,7 @@ echo "</br>";
 
             $servername = "localhost";
             $username = "root";
-            $password = "";
+            $password = "trance96";
             $dbname = "pro_appweb";
             
             // Creamos la conexión
