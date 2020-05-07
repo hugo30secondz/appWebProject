@@ -357,4 +357,196 @@
         return $var;
     }
 
+
+    function buzonAdmin(){
+        include 'controller/conexion.php'; 
+
+        $modulo1 = '
+        <div>
+        <h4>Revisa tu buzón<h4>
+        ';
+
+        $modulo2 = '';
+        include 'controller/conexion.php'; 
+        $CanReg = $mbd->prepare("SELECT * FROM moderador WHERE aprobado = 0 ");
+        $CanReg -> execute();
+        $CountReg = $CanReg -> fetchAll();
+        $TRegistros = count($CountReg);
+        echo "Tienes ",$TRegistros ," notificaciones pendientes";  //sale bien?
+       
+        $modulo3 = '
+        <a href="index.php?run=true"><img src="view/img/buzon.png" alt="buzon"width="150" height="150"></a>
+        </div>
+        ';
+
+        $var= $modulo1.$modulo2.$modulo3;
+
+        return $var;
+    }
+
+    function tableAprobarModerador(){
+        include 'controller/conexion.php'; 
+
+        $modulo1 = '
+            <div class="container">
+
+            <h2 style="color:#82CACD">Aprobar Moderadores</h2>
+            <img class="img-responsive" src="view/img/aprobacion.png" style="width: 71px; border-radius: 43px;">
+
+            </br>
+            <table class="table table-striped">
+                
+                <thead>
+                    <tr>
+                        <th>Usuario ID</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th> Aprobar Solicitud</th>  
+                    </tr>
+                </thead>
+
+        ';
+
+        $modulo2 = '';
+
+        foreach ($mbd->query("SELECT * from usuario INNER JOIN moderador ON usuario.id = moderador.usuario_id WHERE aprobado=0;") as $row){ // en proceso es 0, aprobado es 1 y rechazado es 2
+            $modulo2 .= '
+                <tr>
+                    <td>'.$row['usuario_id'].'</td>
+                    <td>'.$row['nombre'].'</td>
+                    <td>'.$row['apellidos'].'</td>
+                    <td><a title="" href="controller/controllerAprobacionAdmin.php?aprobar='.$row['id'].'"><button type="button" style="margin: 5px" class="btn btn-success">Aprobar</button></a><br><a title="" href="controller/controllerAprobacionAdmin.php?rechazar='.$row['id'].'"><button type="button" style="margin: 5px" class="btn btn-danger">Rechazar</button></a></td>
+                </tr>
+            ';            
+        }
+
+        $modulo3 = '
+            </table>
+            </br>
+            </div>
+        ';
+
+        $var= $modulo1.$modulo2.$modulo3;
+
+        return $var;
+    }
+
+    function graficaLikes(){
+        $modulo='
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <button>Reporte mas likes</button>
+        <br>
+        <br>
+        <br>
+        <div class="container" relative; height:20vh; width:40vw>
+        <canvas id="bar-chart" width="80" height="45" style="display: none"></canvas>
+        </div>
+        <script>
+        $(document).ready(function(){
+          $("button").click(function(){
+            $("canvas").toggle(1000);
+          });
+        });
+        
+        
+        
+        // Bar chart
+        new Chart(document.getElementById("bar-chart"), {
+            type: "bar",
+            data: {
+              labels: ["Bien", "Regular", "Mal"],
+              datasets: [
+                {
+                  label: "Population (millions)",
+                  backgroundColor: ["#228a02", "#fbcd0f","#872223"],
+                  data: [23,8.3,15]
+                }
+              ]
+            },
+            options: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: "Posts con mas LIKES"
+              }
+            }
+        });
+        </script>
+        ';
+        
+        return $modulo;
+    }
+
+
+    function reportes(){
+        $var='
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <br>
+        <hr>
+        <br>
+        <a class="btn btn-primary" href="reportes.php" role="button"><i class="fa fa-pie-chart" aria-hidden="true"></i> Tus reportes</a>
+        ';
+        return $var;
+        
+    }
+    
+    function graficaAprobar(){
+        $modulo='
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+        <br>
+        <br>
+        <button>Reporte Aprovaciones</button>
+        <br>
+        <br>
+        <br>
+        <div class="container" relative; height:20vh; width:40vw>
+        <canvas id="oilChart" width="600" height="400"  style="display: none"></canvas>
+        </div>
+        <script>
+        $(document).ready(function(){
+          $("button").click(function(){
+            $("canvas").toggle(1000);
+          });
+        });
+       var oilCanvas = document.getElementById("oilChart");
+
+       Chart.defaults.global.defaultFontFamily = "Lato";
+       Chart.defaults.global.defaultFontSize = 18;
+       
+       var oilData = {
+           labels: [
+               "Saudi Arabia",
+               "Russia",
+               "Iraq",
+               "United Arab Emirates",
+               "Canada"
+           ],
+           datasets: [
+               {
+                   data: [133.3, 86.2, 52.2, 51.2, 50.2],
+                   backgroundColor: [
+                       "#FF6384",
+                       "#63FF84",
+                       "#84FF63",
+                       "#8463FF",
+                       "#6384FF"
+                   ]
+               }]
+       };
+       
+       var pieChart = new Chart(oilCanvas, {
+         type: "pie",
+         data: oilData
+       });
+       
+       </script>
+       ';
+       
+       return $modulo;
+        
+    }
+
+
+
 ?>

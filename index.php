@@ -94,6 +94,15 @@ include 'view/vistaComponentes.php';
                 ?>
                     <h1> USUARIO ADMINISTRADOR </h1>
                 <?php
+                 echo buzonAdmin();
+                 echo reportes();
+                 function runMyFunction() {
+                    echo tableAprobarModerador();
+                  }
+                
+                  if (isset($_GET['run'])) {
+                    runMyFunction();
+                  }
                 } 
             }
         ?>
@@ -102,6 +111,7 @@ include 'view/vistaComponentes.php';
         }
         else{//sino el formulario de incio de sesión
             echo formInicioSesion();
+            
         ?>
         <?php
 

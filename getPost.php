@@ -1,7 +1,7 @@
 <?php
     include 'controller/conexion.php';
 
-    $id = $_GET['id'];
+    $id = rand(1, 8);
     $gsent = $mbd->prepare("SELECT * FROM publicaciones WHERE id = ".$id." ");;
     $gsent->execute();
     $row = $gsent->fetch(PDO::FETCH_ASSOC);

@@ -1,7 +1,10 @@
 <html>
 <head>
 <script>
+
+
 function showPost(id) {//funcion con ajax para mostrar las publicaciones mediante id
+    
     if (id == "") {
         document.getElementById("txtHint").innerHTML = "";
         return;
@@ -44,9 +47,13 @@ function showPost(id) {//funcion con ajax para mostrar las publicaciones mediant
 
 </head>
 <body>
+<?php
+header("Refresh: 5; URL='ajaxPublicacion.php'");
+?>
     <div id="txtHint">
         <script>
-            showPost(4);
+            id=1;
+            showPost(id);
         </script>
     </div>
 
